@@ -12,10 +12,8 @@ from langchain_openai import OpenAIEmbeddings
 from langchain.vectorstores.faiss import FAISS
 import threading
 from dotenv import load_dotenv
-st.write("Secret Key", st.secrets["OPENAI_API_KEY"])
-st.write(
-    os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"],
-)
+
+load_dotenv()  # take environment variables from .env and load
 
 llm = OpenAI(temperature=0.9, max_tokens=500)
 st.markdown("""
@@ -40,7 +38,6 @@ with last_co:
     st.image("4.png",width=240)
 st.sidebar.title("News Article URLs")
 
-st.markdown('<p class="big-font">Type Your Question</p>', unsafe_allow_html=True)
 urls = []
 for i in range(3):
     url = st.sidebar.text_input(f"URL {i+1}")
@@ -58,7 +55,7 @@ if process_url_clicked:
     data = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(
         separators=['\n\n', '\n', '.', ','],
-        chunk_size=1000
+        chunk_size=4000
     )
     main_placeholder.text("Text Splitter...Started...✅✅✅")
     docs = text_splitter.split_documents(data)
@@ -70,13 +67,13 @@ if process_url_clicked:
     # Save the FAISS index to a pickle file
     vectorstore_openai.save_local("newstool")
 
-query = main_placeholder.text_input(" ")
+query = main_placeholder.text_input("Type your Question Here")
 if query:
             vectorstore=FAISS.load_local("newstool", OpenAIEmbeddings())        
             chain = RetrievalQAWithSourcesChain.from_llm(llm=llm, retriever=vectorstore.as_retriever())
             result = chain({"question": query}, return_only_outputs=True)
             # result will be a dictionary of this format --> {"answer": "", "sources": [] }
-            st.markdown('<p class="big-font">Type Your Question</p>', unsafe_allow_html=True)
+            st.markdown('<p class="big-font">Answer</p>', unsafe_allow_html=True)
             st.write(result["answer"])
 
             # Display sources, if available
