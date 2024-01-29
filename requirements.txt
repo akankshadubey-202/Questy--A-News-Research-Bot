@@ -61,7 +61,6 @@ langdetect==1.0.9
 langsmith==0.0.83
 layoutparser==0.3.4
 libmagic==1.0
-lxml==5.1.0
 Markdown==3.5.2
 markdown-it-py==3.0.0
 MarkupSafe==2.1.4
