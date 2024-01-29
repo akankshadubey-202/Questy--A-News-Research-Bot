@@ -60,6 +60,7 @@ langchain-openai==0.0.5
 langdetect==1.0.9
 langsmith==0.0.83
 layoutparser==0.3.4
+libglvnd
 libmagic==1.0
 Markdown==3.5.2
 markdown-it-py==3.0.0
