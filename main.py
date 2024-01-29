@@ -1,13 +1,12 @@
 import streamlit as st
-from streamlit.secrets import Secrets
+import os
 
 # Load environment variables from .env file (optional)
 from dotenv import load_dotenv
-load_dotenv()
 
-# Retrieve secret key from Streamlit's secrets
-secrets = Secrets()
-secret_key = secrets.get("SECRET_KEY")
+
+# Retrieve secret key from the environment variable
+secret_key = os.getenv("SECRET_KEY")
 
 if secret_key is None:
     st.error("Please provide a secret key in the advanced settings.")
