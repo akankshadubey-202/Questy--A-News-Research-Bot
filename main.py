@@ -40,7 +40,7 @@ else:
           
     </style>
     """, unsafe_allow_html=True)
-    st.title("           Questy - A Research Buddy 🤖")
+    st.title("Questy - A Research Buddy 🤖")
     left_co, cent_co,last_co = st.columns(3)
     with left_co:
         st.image("1.png",width=240)
