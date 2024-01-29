@@ -12,8 +12,10 @@ from langchain_openai import OpenAIEmbeddings
 from langchain.vectorstores.faiss import FAISS
 import threading
 from dotenv import load_dotenv
-
-load_dotenv()  # take environment variables from .env and load
+st.write("Secret Key", st.secrets["OPENAI_API_KEY"])
+st.write(
+    os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"],
+)
 
 llm = OpenAI(temperature=0.9, max_tokens=500)
 st.markdown("""
